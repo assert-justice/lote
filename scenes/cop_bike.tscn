@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbksqgf0660bq"]
+
+[ext_resource type="Script" path="res://scripts/game/CopBike.cs" id="1_jkdtd"]
+[ext_resource type="PackedScene" uid="uid://bb8lqwm1dtjmm" path="res://scenes/bullet.tscn" id="2_kswyu"]
+[ext_resource type="Texture2D" uid="uid://c2acmsiteo0pk" path="res://textures/cop_bike.svg" id="2_t4ue7"]
+[ext_resource type="Script" path="res://scripts/game/GunArm.cs" id="4_4ubob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h01a0"]
+size = Vector2(253, 81)
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_jkdtd")
+BulletScene = ExtResource("2_kswyu")
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(88, -12)
+
+[node name="CopBike" type="Sprite2D" parent="Pivot"]
+position = Vector2(1, -14)
+texture = ExtResource("2_t4ue7")
+metadata/_edit_lock_ = true
+
+[node name="GunArm" type="Node2D" parent="Pivot"]
+position = Vector2(41, -30)
+script = ExtResource("4_4ubob")
+metadata/_edit_lock_ = true
+
+[node name="Area2D" type="Area2D" parent="Pivot"]
+position = Vector2(1, 12)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Area2D"]
+position = Vector2(-0.5, -10.5)
+shape = SubResource("RectangleShape2D_h01a0")
+metadata/_edit_lock_ = true

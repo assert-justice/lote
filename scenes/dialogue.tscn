@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://cf0sfnwlym32b"]
+
+[ext_resource type="Script" path="res://scripts/dialogue/Dialogue.cs" id="1_l7i53"]
+[ext_resource type="Resource" uid="uid://cd27tl8y4imdq" path="res://ink_scripts/test.ink" id="2_dgmt7"]
+[ext_resource type="Texture2D" uid="uid://dllro12s7028t" path="res://icon.svg" id="3_b51ov"]
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l7i53")
+story = ExtResource("2_dgmt7")
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="ImageContainer" type="HBoxContainer" parent="HBox/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Image" type="TextureRect" parent="HBox/VBox/ImageContainer"]
+visible = false
+layout_mode = 2
+texture = ExtResource("3_b51ov")
+stretch_mode = 2
+
+[node name="Text" type="Label" parent="HBox/VBox"]
+layout_mode = 2
+text = "Name: Name"
+
+[node name="OptionContainer" type="VBoxContainer" parent="HBox/VBox"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBox/VBox/OptionContainer"]
+layout_mode = 2
+text = "Option 1"
+
+[node name="Button2" type="Button" parent="HBox/VBox/OptionContainer"]
+layout_mode = 2
+text = "Option 2"

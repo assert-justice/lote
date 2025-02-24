@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwb7no0v3vtdg"]
+
+[ext_resource type="Script" path="res://scripts/game/Player.cs" id="1_ly2tw"]
+[ext_resource type="PackedScene" uid="uid://bb8lqwm1dtjmm" path="res://scenes/bullet.tscn" id="2_owq60"]
+[ext_resource type="Script" path="res://scripts/game/GunArm.cs" id="3_41gwv"]
+[ext_resource type="Texture2D" uid="uid://rnmjqxtlg38n" path="res://textures/drawing.svg" id="4_4djp5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8ms5"]
+radius = 25.0
+
+[node name="Player" type="Node2D" groups=["Player"]]
+script = ExtResource("1_ly2tw")
+BulletScene = ExtResource("2_owq60")
+
+[node name="Drawing" type="Sprite2D" parent="."]
+position = Vector2(89, -26)
+texture = ExtResource("4_4djp5")
+metadata/_edit_lock_ = true
+
+[node name="GunArm" type="Node2D" parent="."]
+position = Vector2(129, -42)
+script = ExtResource("3_41gwv")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(129, -42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_w8ms5")
+metadata/_edit_lock_ = true
