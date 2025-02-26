@@ -5,6 +5,7 @@ public partial class Bullet : Entity
 {
 	// public Pool<Bullet> Pool;
 	// public Vector2 Velocity;
+	public float DamageVal = 10;
 	public override void _Draw()
 	{
 		base._Draw();

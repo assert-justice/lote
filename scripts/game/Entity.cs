@@ -6,7 +6,8 @@ public partial class Entity : Node2D{
 	public Vector2 Velocity = new();
 	public float Health = 100;
 	[Export] public float MaxHealth = 100;
-	public Pool<Entity> Pool;
+	public EntPool Pool;
+	public int Team = 0;
 	List<Clock> clocks = new();
 	List<EntPool> pools = new();
 	public override void _Ready()
@@ -34,6 +35,7 @@ public partial class Entity : Node2D{
 
 	public virtual void Damage(float damage){
 		Health -= damage;
+		if(Health <= 0) Die();
 	}
 	public virtual void Die(){
 		Pool.Free(this);

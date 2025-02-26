@@ -8,3 +8,16 @@
 script = ExtResource("1_8f8l0")
 PlayerScene = ExtResource("2_6wxjp")
 CopBikeScene = ExtResource("3_n4leu")
+
+[node name="Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1921.0
+offset_bottom = 1081.0
+
+[node name="Label" type="Label" parent="Hud"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Health: 100x3
+Ammo: 10/100"

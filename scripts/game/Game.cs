@@ -10,9 +10,11 @@ public partial class Game : Node2D
 	[Export] PackedScene GangsterWheelScene;
 	[ExportGroup("PowerUps")]
 	[Export] PackedScene ETankScene;
-	Player player;
-	List<float> rails = new();
-	Pool<Entity> copBikePool;
+	readonly List<float> rails = new();
+	EntPool copBikePool;
+	EntPool playerPool;
+	int lives = 3;
+	Label hudLabel;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -25,23 +27,10 @@ public partial class Game : Node2D
 			rails.Add(y);
 			y += stride;
 		}
-		copBikePool = new(() =>
-		{
-			var b = CopBikeScene.Instantiate<CopBike>();
-			return b;
-		})
-		{
-			InitFn = b =>
-			{
-				AddChild(b);
-			},
-			FreeFn = b =>
-			{
-				RemoveChild(b);
-			}
-		};
-		SpawnPlayer(100, 500);
-		SpawnEnt(800, 500, copBikePool);
+		copBikePool = new(this, ()=>{return CopBikeScene.Instantiate<CopBike>();});
+		playerPool = new(this, ()=>{return PlayerScene.Instantiate<Player>();});
+		hudLabel = GetNode<Label>("Hud/Label");
+		Start();
 	}
 	public override void _Draw()
 	{
@@ -51,13 +40,37 @@ public partial class Game : Node2D
 			DrawRect(new Rect2(0, rail, 1920, 5), Colors.DarkGray);
 		}
 	}
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		foreach (var p in playerPool.GetAlive())
+		{
+			if(p is Player player){
+				// Update hud
+				hudLabel.Text = $"Health: {player.Health}x{lives}\nAmmo: {player.GetAmmoText()}";
+			}
+		}
+		if(playerPool.pool.CountAlive() == 0){
+			if(lives > 0){
+				lives--;
+				SpawnPlayer(100, 500);
+			}
+			else{
+				// End game
+			}
+		}
+	}
+	public void Start(){
+		SpawnPlayer(100, 500);
+		// SpawnEnt(800, 500, copBikePool);
+		lives = 3;
+	}
 	void SpawnPlayer(float x, float y){
-		player = PlayerScene.Instantiate<Player>();
-		AddChild(player);
+		var player = playerPool.GetNew() as Player;
 		player.Position = new Vector2(x, y);
 		player.SetRails(rails);
 	}
-	Entity SpawnEnt(float x, float y, Pool<Entity> pool){
+	static Entity SpawnEnt(float x, float y, EntPool pool){
 		var ent = pool.GetNew();
 		ent.Position = new Vector2(x, y);
 		return ent;
