@@ -11,6 +11,23 @@ public abstract partial class Menu: Control{
             else OnSleep();
         };
     }
-    public virtual void OnWake(){}
+    static bool FocusHelp(Node n){
+        if (n is Control c){
+                if(c.FocusMode == FocusModeEnum.All){
+                    c.CallDeferred("grab_focus");
+                    // GD.Print((c as Button).Text);
+                    return true;
+                }
+            }
+            foreach (var child in n.GetChildren())
+            {
+                if(FocusHelp(child)) return true;
+            }
+            return false;
+    }
+    public virtual void OnWake(){
+        // Find and focus on first thing that can be focused
+        FocusHelp(this);
+    }
     public virtual void OnSleep(){}
 }

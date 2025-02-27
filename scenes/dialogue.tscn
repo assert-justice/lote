@@ -41,13 +41,17 @@ stretch_mode = 2
 layout_mode = 2
 text = "Name: Name"
 
-[node name="OptionContainer" type="VBoxContainer" parent="HBox/VBox"]
+[node name="HBox" type="HBoxContainer" parent="HBox/VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="OptionContainer" type="VBoxContainer" parent="HBox/VBox/HBox"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBox/VBox/OptionContainer"]
+[node name="Button" type="Button" parent="HBox/VBox/HBox/OptionContainer"]
 layout_mode = 2
 text = "Option 1"
 
-[node name="Button2" type="Button" parent="HBox/VBox/OptionContainer"]
+[node name="Button2" type="Button" parent="HBox/VBox/HBox/OptionContainer"]
 layout_mode = 2
 text = "Option 2"

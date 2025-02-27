@@ -2,14 +2,14 @@
 using Godot;
 
 public partial class MainMenu: Menu{
-    public override void _Ready()
-    {
-        base._Ready();
-        GetNode<Button>("HBox/VBox/Join").ButtonDown += ()=>{
-			menuSystem.PushMenu("GameBrowser");
+	public override void _Ready()
+	{
+		base._Ready();
+		GetNode<Button>("HBoxContainer/VBoxContainer/Launch").ButtonDown += ()=>{
+			menuSystem.PushMenu("Dialogue");
 		};
-        GetNode<Button>("HBox/VBox/Quit").ButtonDown += ()=>{
+		GetNode<Button>("HBoxContainer/VBoxContainer/Quit").ButtonDown += ()=>{
 			GetTree().Quit();
 		};
-    }
+	}
 }

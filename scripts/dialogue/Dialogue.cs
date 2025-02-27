@@ -2,19 +2,33 @@ using System.Collections.Generic;
 using Godot;
 using GodotInk;
 
-public partial class Dialogue : Control
+public partial class Dialogue : Menu
 {
 	[Export] private InkStory story;
 	TextureRect image;
 	Label text;
 	VBoxContainer optionContainer;
+	bool firstWake = true;
 	public override void _Ready()
 	{
+		base._Ready();
 		image = GetNode<TextureRect>("HBox/VBox/ImageContainer/Image");
 		text = GetNode<Label>("HBox/VBox/Text");
-		optionContainer = GetNode<VBoxContainer>("HBox/VBox/OptionContainer");
+		optionContainer = GetNode<VBoxContainer>("HBox/VBox/HBox/OptionContainer");
 		story.BindExternalFunction("print", (string s)=>{GD.Print(s);});
-		Continue();
+		story.BindExternalFunction("set_menu", (string s)=>{menuSystem.PushMenu(s);});
+		story.BindExternalFunction("launch", ()=>{menuSystem.Launch();});
+		// Continue();
+	}
+	public override void OnWake()
+	{
+		base.OnWake();
+		// Continue();
+		if(firstWake){
+			firstWake = false;
+			// Continue();
+			CallDeferred("Continue");
+		}
 	}
 	void Clear(){
 		foreach (var c in optionContainer.GetChildren())
@@ -53,9 +67,5 @@ public partial class Dialogue : Control
 			optionContainer.AddChild(b);
 		}
 		if(newButtons.Count > 0) newButtons[0].GrabFocus();
-		// var first = optionContainer.GetChild<Button>(0);
-		// first.FocusMode = FocusModeEnum.All;
-		// first.GrabFocus();
-		// first.CallDeferred("grab_focus");
 	}
 }

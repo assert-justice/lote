@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmg7khwb2tvty"]
+[gd_scene load_steps=5 format=3 uid="uid://cmg7khwb2tvty"]
 
 [ext_resource type="Script" path="res://scripts/menu/MenuSystem.cs" id="1_1flld"]
 [ext_resource type="Script" path="res://scripts/menu/MainMenu.cs" id="2_3ihnj"]
+[ext_resource type="PackedScene" uid="uid://cf0sfnwlym32b" path="res://scenes/dialogue.tscn" id="2_rtgf0"]
+[ext_resource type="PackedScene" uid="uid://dco3mbbmqpbeq" path="res://scenes/game.tscn" id="2_v35d6"]
 
 [node name="MenuManager" type="Control"]
 layout_mode = 3
@@ -11,6 +13,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1flld")
+GameScene = ExtResource("2_v35d6")
+
+[node name="GameHolder" type="Node2D" parent="."]
+
+[node name="Dialogue" parent="." instance=ExtResource("2_rtgf0")]
+visible = false
+layout_mode = 1
 
 [node name="MainMenu" type="Control" parent="."]
 visible = false
@@ -61,7 +70,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_3ihnj")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Options"]
 layout_mode = 1
@@ -87,13 +95,13 @@ text = "Back
 "
 
 [node name="Pause" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_3ihnj")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Pause"]
 layout_mode = 1
