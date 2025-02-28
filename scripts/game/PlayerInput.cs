@@ -10,6 +10,7 @@ public class PlayerInput{
     Vector2 aim;
     bool isFiring;
     bool isReloading;
+    bool isPausing;
     InputMethod inputMethod = InputMethod.Gamepad;
     public void Poll(){
         // Handle controller input.
@@ -20,6 +21,7 @@ public class PlayerInput{
         isJumping = Input.IsActionJustPressed("pad_jump");
         isDropping = Input.IsActionPressed("pad_drop");
         isReloading = Input.IsActionJustPressed("pad_reload");
+        isPausing = Input.IsActionJustPressed("pad_pause");
         if(move != 0 || aim.Length() > 0 || isJumping || isDropping || isFiring || isReloading){
             inputMethod = InputMethod.Gamepad;
             return;
@@ -32,6 +34,7 @@ public class PlayerInput{
         isJumping = Input.IsActionJustPressed("kb_jump");
         isDropping = Input.IsActionPressed("kb_drop");
         isReloading = Input.IsActionJustPressed("kb_reload");
+        isPausing = Input.IsActionJustPressed("kb_pause");
         if(move != 0 || isJumping || isDropping || isFiring || isReloading){
             inputMethod = InputMethod.Kb;
         }
@@ -41,6 +44,7 @@ public class PlayerInput{
     public bool IsDropping(){return isDropping;}
     public bool IsFiring(){return isFiring;}
     public bool IsReloading(){return isReloading;}
+    public bool IsPausing(){return isPausing;}
     public Vector2 GetAim(){return aim;}
     public InputMethod GetInputMethod(){return inputMethod;}
 }

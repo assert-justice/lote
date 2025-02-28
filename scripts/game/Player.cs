@@ -26,9 +26,11 @@ public partial class Player : Entity
 	int magazine = 10;
 	int bullets = 100;
 	int bulletsCapacity = 100;
+	MenuSystem menuSystem;
 	public override void _Ready()
 	{
 		base._Ready();
+		menuSystem = GetTree().GetNodesInGroup("MenuSystem")[0] as MenuSystem;
 		gunArm = GetNode<GunArm>("GunArm");
 		hitBox = GetNode<Area2D>("Area2D");
 		bulletPool = AddPool(GetParent(), () =>
@@ -64,6 +66,10 @@ public partial class Player : Entity
 	{
 		float dt = (float)delta;
 		playerInput.Poll();
+		if(playerInput.IsPausing()) {
+			// menuSystem.Pause(true);
+			menuSystem.CallDeferred("Pause", true);
+		}
 		Velocity.X = playerInput.GetMove() * Speed;
 		Velocity.Y += Gravity;
 		if(playerInput.IsJumping() && IsOnRail()) {

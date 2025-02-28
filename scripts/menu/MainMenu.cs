@@ -8,6 +8,9 @@ public partial class MainMenu: Menu{
 		GetNode<Button>("HBoxContainer/VBoxContainer/Launch").ButtonDown += ()=>{
 			menuSystem.PushMenu("Dialogue");
 		};
+		GetNode<Button>("HBoxContainer/VBoxContainer/Options").ButtonDown += ()=>{
+			menuSystem.PushMenu("Options");
+		};
 		GetNode<Button>("HBoxContainer/VBoxContainer/Quit").ButtonDown += ()=>{
 			GetTree().Quit();
 		};

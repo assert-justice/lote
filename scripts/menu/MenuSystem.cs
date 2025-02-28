@@ -9,6 +9,7 @@ public partial class MenuSystem : Control
 	public override void _Ready()
 	{
 		gameHolder = GetNode<Node2D>("GameHolder");
+		Pause(true);
 		menuStack.Push(GetChild(1).Name);
 		SetMenu();
 	}
@@ -39,7 +40,20 @@ public partial class MenuSystem : Control
 		return name;
 	}
 	public void Launch(){
-		HideMenus();
+		Pause(false);
 		gameHolder.AddChild(GameScene.Instantiate());
+	}
+	public bool IsPaused(){
+		return GetTree().Paused;
+	}
+	public void Pause(bool shouldPause){
+		if(IsPaused() == shouldPause) return;
+		GetTree().Paused = !IsPaused();
+		if(IsPaused()){
+			PushMenu("Pause");
+		}
+		else{
+			HideMenus();
+		}
 	}
 }
