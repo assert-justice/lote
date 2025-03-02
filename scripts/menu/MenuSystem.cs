@@ -6,9 +6,11 @@ public partial class MenuSystem : Control
 	[Export] PackedScene GameScene;
 	Stack<string> menuStack = new();
 	Node2D gameHolder;
+	AudioStreamPlayer audioStreamPlayer;
 	public override void _Ready()
 	{
 		gameHolder = GetNode<Node2D>("GameHolder");
+		audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		Pause(true);
 		menuStack.Push(GetChild(1).Name);
 		SetMenu();
@@ -16,6 +18,7 @@ public partial class MenuSystem : Control
 
 	public override void _Process(double delta)
 	{
+		// if(!audioStreamPlayer.Playing)audioStreamPlayer.Play();
 	}
 	void HideMenus(){
 		foreach (var child in GetChildren())
