@@ -13,11 +13,15 @@ public partial class Dialogue : Menu
 	{
 		base._Ready();
 		image = GetNode<TextureRect>("HBox/VBox/ImageContainer/Image");
-		text = GetNode<Label>("HBox/VBox/Text");
+		text = GetNode<Label>("HBox/VBox/PanelContainer/Text");
 		optionContainer = GetNode<VBoxContainer>("HBox/VBox/HBox/OptionContainer");
 		story.BindExternalFunction("print", (string s)=>{GD.Print(s);});
 		story.BindExternalFunction("set_menu", (string s)=>{menuSystem.PushMenu(s);});
 		story.BindExternalFunction("launch", ()=>{menuSystem.Launch();});
+		story.BindExternalFunction("quit", ()=>{GetTree().Quit();});
+		// story.ChoosePathString()
+		// story.StoreVariable();
+		// story.FetchVariable();
 		// Continue();
 	}
 	public override void OnWake()

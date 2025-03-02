@@ -28,4 +28,5 @@ You had {health} health!
  * There were four lines of content.
 
 - They lived happily ever after.
+ ~ quit()
     -> END

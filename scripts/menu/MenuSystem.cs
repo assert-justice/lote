@@ -56,4 +56,14 @@ public partial class MenuSystem : Control
 			HideMenus();
 		}
 	}
+	public void Win(){
+		Pause(true);
+		GD.Print("win");
+		PushMenu("Dialogue");
+	}
+	public void Lose(){
+		Pause(true);
+		GD.Print("lose");
+		PushMenu("Dialogue");
+	}
 }

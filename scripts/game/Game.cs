@@ -15,9 +15,12 @@ public partial class Game : Node2D
 	EntPool playerPool;
 	int lives = 3;
 	Label hudLabel;
+	MenuSystem menuSystem;
 	public override void _Ready()
 	{
 		base._Ready();
+		var temp = GetTree().GetNodesInGroup("MenuSystem");
+		if(temp.Count > 0) menuSystem = temp[0] as MenuSystem;
 		int screenHeight = 1080;
 		int numRails = 5;
 		int stride = screenHeight/(numRails + 1);
@@ -57,12 +60,16 @@ public partial class Game : Node2D
 			}
 			else{
 				// End game
+				menuSystem.Lose();
 			}
+		}
+		if(copBikePool.pool.CountAlive() == 0){
+			menuSystem.Win();
 		}
 	}
 	public void Start(){
 		SpawnPlayer(100, 500);
-		// SpawnEnt(800, 500, copBikePool);
+		SpawnEnt(800, 500, copBikePool);
 		lives = 3;
 	}
 	void SpawnPlayer(float x, float y){

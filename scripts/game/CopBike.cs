@@ -6,6 +6,7 @@ public partial class CopBike : Entity
 	[Export] private PackedScene BulletScene;
 	[Export] private float FireTime = 0.3f;
 	[Export] private float BulletSpeed = 500;
+	[Export] private float Speed = 100;
 	EntPool bulletPool;
 	Clock fireClock;
 	GunArm gunArm;
@@ -43,11 +44,22 @@ public partial class CopBike : Entity
 		};
 		player = GetTree().GetNodesInGroup("Player")[0] as Player;
 	}
+    public override void Init()
+    {
+        base.Init();
+		Velocity = Vector2.Left * Speed;
+    }
 
-	public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
 		gunArm.Rotation = (player.GetHitboxPosition() - gunArm.GlobalPosition).Angle();
 		base._PhysicsProcess(delta);
+		if(Position.X < 200){
+			Velocity = Vector2.Right * Speed;
+		}
+		if(Position.X > 1700){
+			Velocity = Vector2.Left * Speed;
+		}
 	}
 	public override void Damage(float damage)
 	{

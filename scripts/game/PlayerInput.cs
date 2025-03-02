@@ -28,8 +28,8 @@ public class PlayerInput{
         }
         // Handle mouse/keyboard input.
         move = Input.GetAxis("kb_move_left", "kb_move_right");
-        aim = Input.GetVector("kb_aim_left", "kb_aim_right", "kb_aim_up", "kb_aim_down");
-        if(aim.Length() > 0) aim = aim.Normalized();
+        // aim = Input.GetVector("kb_aim_left", "kb_aim_right", "kb_aim_up", "kb_aim_down");
+        // if(aim.Length() > 0) aim = aim.Normalized();
         isFiring = Input.IsActionPressed("kb_fire");
         isJumping = Input.IsActionJustPressed("kb_jump");
         isDropping = Input.IsActionPressed("kb_drop");
@@ -46,5 +46,6 @@ public class PlayerInput{
     public bool IsReloading(){return isReloading;}
     public bool IsPausing(){return isPausing;}
     public Vector2 GetAim(){return aim;}
+    public void SetAim(Vector2 v){aim = v;}
     public InputMethod GetInputMethod(){return inputMethod;}
 }

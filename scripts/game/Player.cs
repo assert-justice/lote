@@ -30,7 +30,8 @@ public partial class Player : Entity
 	public override void _Ready()
 	{
 		base._Ready();
-		menuSystem = GetTree().GetNodesInGroup("MenuSystem")[0] as MenuSystem;
+		var temp = GetTree().GetNodesInGroup("MenuSystem");
+		if(temp.Count > 0) menuSystem = temp[0] as MenuSystem;
 		gunArm = GetNode<GunArm>("GunArm");
 		hitBox = GetNode<Area2D>("Area2D");
 		bulletPool = AddPool(GetParent(), () =>
@@ -66,6 +67,10 @@ public partial class Player : Entity
 	{
 		float dt = (float)delta;
 		playerInput.Poll();
+		if(playerInput.GetInputMethod() == InputMethod.Kb){
+			// Need to calculate aim direction
+			playerInput.SetAim((GetGlobalMousePosition() - gunArm.GlobalPosition).Normalized());
+		}
 		if(playerInput.IsPausing()) {
 			// menuSystem.Pause(true);
 			menuSystem.CallDeferred("Pause", true);
@@ -137,7 +142,7 @@ public partial class Player : Entity
 	{
 		if(InvulnClock.GetDuration() > 0) return;
 		InvulnClock.Reset();
-		base.Damage(damage);
+		// base.Damage(damage);
 	}
 	public string GetAmmoText(){
 		return $"{magazine}/{bullets}";
