@@ -7,9 +7,11 @@ public partial class MenuSystem : Control
 	Stack<string> menuStack = new();
 	Node2D gameHolder;
 	AudioStreamPlayer audioStreamPlayer;
+	Dialogue dialogue;
 	public override void _Ready()
 	{
 		gameHolder = GetNode<Node2D>("GameHolder");
+		dialogue = GetNode<Dialogue>("Dialogue");
 		audioStreamPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 		Pause(true);
 		menuStack.Push(GetChild(1).Name);
@@ -44,7 +46,9 @@ public partial class MenuSystem : Control
 	}
 	public void Launch(){
 		Pause(false);
+		if(gameHolder.GetChildCount() > 0) gameHolder.GetChild(0).QueueFree();
 		gameHolder.AddChild(GameScene.Instantiate());
+		// gameHolder.CallDeferred("AddChild", GameScene.Instantiate());
 	}
 	public bool IsPaused(){
 		return GetTree().Paused;
@@ -61,12 +65,12 @@ public partial class MenuSystem : Control
 	}
 	public void Win(){
 		Pause(true);
-		GD.Print("win");
 		PushMenu("Dialogue");
+		dialogue.SetWon(true);
 	}
 	public void Lose(){
 		Pause(true);
-		GD.Print("lose");
 		PushMenu("Dialogue");
+		dialogue.SetWon(false);
 	}
 }

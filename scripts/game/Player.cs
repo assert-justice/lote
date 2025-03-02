@@ -142,7 +142,7 @@ public partial class Player : Entity
 	{
 		if(InvulnClock.GetDuration() > 0) return;
 		InvulnClock.Reset();
-		// base.Damage(damage);
+		base.Damage(damage);
 	}
 	public string GetAmmoText(){
 		return $"{magazine}/{bullets}";

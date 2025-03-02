@@ -15,7 +15,6 @@ public abstract partial class Menu: Control{
         if (n is Control c){
                 if(c.FocusMode == FocusModeEnum.All){
                     c.CallDeferred("grab_focus");
-                    // GD.Print((c as Button).Text);
                     return true;
                 }
             }

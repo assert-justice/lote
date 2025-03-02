@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dco3mbbmqpbeq" path="res://scenes/game.tscn" id="2_v35d6"]
 [ext_resource type="Script" path="res://scripts/menu/OptionsMenu.cs" id="5_3nsts"]
 [ext_resource type="Script" path="res://scripts/menu/PauseMenu.cs" id="5_k255f"]
-[ext_resource type="AudioStream" uid="uid://cm2twukr1x750" path="res://music/music.ogg" id="7_rsytk"]
+[ext_resource type="AudioStream" uid="uid://dvrdudtgumvvg" path="res://music/music_loop.ogg" id="7_s3m3b"]
 
 [node name="MenuManager" type="Control" groups=["MenuSystem"]]
 process_mode = 3
@@ -142,5 +142,5 @@ layout_mode = 2
 text = "Quit"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_rsytk")
+stream = ExtResource("7_s3m3b")
 autoplay = true

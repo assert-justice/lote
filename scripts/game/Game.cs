@@ -61,16 +61,18 @@ public partial class Game : Node2D
 			else{
 				// End game
 				menuSystem.Lose();
+				QueueFree();
 			}
 		}
 		if(copBikePool.pool.CountAlive() == 0){
 			menuSystem.Win();
+			QueueFree();
 		}
 	}
 	public void Start(){
 		SpawnPlayer(100, 500);
 		SpawnEnt(800, 500, copBikePool);
-		lives = 3;
+		lives = 0;
 	}
 	void SpawnPlayer(float x, float y){
 		var player = playerPool.GetNew() as Player;

@@ -15,7 +15,25 @@ What might be news is that you are a courier, transporting necessities like medi
 === begin ===
 You rev your mag cycle and get ready to do some mutual aid... with a vengeance!
  ~ launch()
- -> denouement
+ -> win
+
+=== win ===
+
+You won! Well done! A winner is you!
+ + [Play again?]
+   -> begin
+ + [Quit?]
+   See you later
+   ~ quit()
+
+=== lose ===
+
+You lost :( Sorry about that bud.
+ + [Play again?]
+   -> begin
+ + [Quit?]
+   See you later
+   ~ quit()
 
 === denouement ===
 
@@ -28,5 +46,5 @@ You had {health} health!
  * There were four lines of content.
 
 - They lived happily ever after.
- ~ quit()
+ ~ launch()
     -> END

@@ -34,6 +34,12 @@ public partial class Dialogue : Menu
 			CallDeferred("Continue");
 		}
 	}
+	public void SetWon(bool won){
+		if (won) story.ChoosePathString("win");
+		else story.ChoosePathString("lose");
+		// Continue();
+		CallDeferred("Continue");
+	}
 	void Clear(){
 		foreach (var c in optionContainer.GetChildren())
 		{
