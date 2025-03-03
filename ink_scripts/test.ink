@@ -7,8 +7,9 @@ EXTERNAL launch()
 
 === intro ===
 
-In the bleak future of... next Thursday evil corporations control everything. This shouldn't be news to you.
+In the bleak future of... well right now actually evil corporations control everything. This shouldn't be news to you.
 What might be news is that you are a courier, transporting necessities like medicine and indy games to the deprived masses.
+You operate on the edge, between light and dark, law and crime, authoritarianism and anarchy. You are one of the...
  ~ set_menu("MainMenu")
 -> begin
 
@@ -25,6 +26,7 @@ You won! Well done! A winner is you!
  + [Quit?]
    See you later
    ~ quit()
+ -> END
 
 === lose ===
 
@@ -34,6 +36,7 @@ You lost :( Sorry about that bud.
  + [Quit?]
    See you later
    ~ quit()
+ -> END
 
 === denouement ===
 
