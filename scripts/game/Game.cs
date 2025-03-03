@@ -71,8 +71,11 @@ public partial class Game : Node2D
 	}
 	public void Start(){
 		SpawnPlayer(100, 500);
-		SpawnEnt(800, 500, copBikePool);
-		lives = 0;
+		SpawnEnt(2500, 500, copBikePool);
+		SpawnEnt(3000, 800, copBikePool);
+		SpawnEnt(3500, 300, copBikePool);
+		SpawnEnt(4000, 100, copBikePool);
+		lives = 3;
 	}
 	void SpawnPlayer(float x, float y){
 		var player = playerPool.GetNew() as Player;
