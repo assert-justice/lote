@@ -27,17 +27,14 @@ public partial class Dialogue : Menu
 	public override void OnWake()
 	{
 		base.OnWake();
-		// Continue();
 		if(firstWake){
 			firstWake = false;
-			// Continue();
 			CallDeferred("Continue");
 		}
 	}
 	public void SetWon(bool won){
 		if (won) story.ChoosePathString("win");
 		else story.ChoosePathString("lose");
-		// Continue();
 		CallDeferred("Continue");
 	}
 	void Clear(){
